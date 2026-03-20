@@ -1,0 +1,6 @@
+@VaccineManager.Api_HostAddress = http://localhost:5254
+
+GET {{VaccineManager.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

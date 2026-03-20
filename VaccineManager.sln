@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaccineManager.Domain", "libs\backend\VaccineManager.Domain\VaccineManager.Domain.csproj", "{8093CD91-A083-40B4-98B8-219F4F8479DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VaccineManager.Api", "apps\VaccineManager.Api\VaccineManager.Api.csproj", "{29A3C8EC-A9E1-42FB-96DA-23129B35A696}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8093CD91-A083-40B4-98B8-219F4F8479DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8093CD91-A083-40B4-98B8-219F4F8479DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8093CD91-A083-40B4-98B8-219F4F8479DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8093CD91-A083-40B4-98B8-219F4F8479DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29A3C8EC-A9E1-42FB-96DA-23129B35A696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29A3C8EC-A9E1-42FB-96DA-23129B35A696}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29A3C8EC-A9E1-42FB-96DA-23129B35A696}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29A3C8EC-A9E1-42FB-96DA-23129B35A696}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
