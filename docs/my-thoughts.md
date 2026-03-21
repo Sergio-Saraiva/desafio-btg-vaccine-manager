@@ -4,4 +4,12 @@
 - VaccinationRecord: the link between a Vaccine and a Person.
 - Every id a UUID V7, wich might help us with idexing when querying the database.
 - Every entity has a Id, CreatedAt, UpdatedAt and DeletedAt.
-- Next steps: creating repository interfaces, creating databsae infrastucture.
+- Next steps: create repository interfaces, creating databsae infrastucture.
+- The validation might move when FluentValidation is added.
+- Created the Application DbContext, overwritten the SaveChanges method, for automatic CreatedAt and UpdatedAt populating.
+- Created BaseRepository for common methods that might be used by other repositories.
+- Created unique empty interfaces for specifc entity methods.
+- Using UnitOfWork for atomic actions in the database and for better management of possible future transactions.
+- Next steps: wire with database (SQLite), implement dependecy injection for infrastructure layer, write first unit tests?
+
+
