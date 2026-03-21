@@ -1,3 +1,6 @@
+using VaccineManager.Application.Common.Settings;
+using VaccineManager.IOC;
+
 namespace VaccineManager.Api;
 
 public class Program
@@ -5,13 +8,15 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
+        builder.Services.Configure<AppSettings>(
+            builder.Configuration
+        );
         // Add services to the container.
 
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
-
+        builder.Services.RegisterServices(builder.Configuration);
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

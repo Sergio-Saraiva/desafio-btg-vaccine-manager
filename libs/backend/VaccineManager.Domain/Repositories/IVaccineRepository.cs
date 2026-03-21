@@ -2,7 +2,7 @@ using VaccineManager.Domain.Entities;
 
 namespace VaccineManager.Domain.Repositories;
 
-public interface IVaccinationRepository : IBaseRepository<Vaccine>
+public interface IVaccineRepository : IBaseRepository<Vaccine>
 {
     
 }

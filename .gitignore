@@ -13,7 +13,7 @@ bin/
 obj/
 dist/
 build/
-
+net10.0/
 # Node modules and package managers
 node_modules/
 package-lock.json
@@ -50,3 +50,6 @@ Thumbs.db
 .DS_Store
 node_modules
 dist
+
+*.db
+*.db-*
