@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using VaccineManager.Domain.Entities;
+using VaccineManager.Domain.Enums;
 using VaccineManager.Domain.Repositories;
 using VaccineManager.Infrastructure.Persistence.Context;
 
@@ -8,5 +10,13 @@ public class PersonRepository : BaseRepository<Person>, IPersonRepository
 {
     public PersonRepository(AppDbContext dbContext) : base(dbContext)
     {
+    }
+
+    public async Task<Person?> GetByDocumentAsync(DocumentType documentType, string documentNumber)
+    {
+        return await _dbSet.Where(p =>
+                p.DocumentType == documentType &&
+                p.DocumentNumber == documentNumber)
+            .FirstOrDefaultAsync();
     }
 }

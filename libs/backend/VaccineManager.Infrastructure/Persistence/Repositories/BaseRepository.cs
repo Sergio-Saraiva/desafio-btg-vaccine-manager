@@ -14,7 +14,7 @@ public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     }
 
     private readonly AppDbContext _dbContext;
-    private readonly DbSet<T> _dbSet;
+    protected readonly DbSet<T> _dbSet;
     
     public async Task<T?> GetByIdAsync(Guid id)
     {

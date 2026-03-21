@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VaccineManager.Application;
 using VaccineManager.Application.Common.Settings;
 using VaccineManager.Infrastructure;
 
@@ -12,6 +13,7 @@ public static class NativeInjectorBootstrap
         var appSettings = new AppSettings();
         configuration.Bind(appSettings);
         services
+            .AddApplication()
             .AddInfrastructure(appSettings);
         
         return services;

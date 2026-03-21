@@ -15,3 +15,5 @@
 - Next steps: implement CQRS, use MediatR, FluentValidations and Result pattern.
 - Thoughts about auth: implement my own or use a third-party auth service? for study porpuses maybe implement my own, depends on time, need rbac for admin and client access. admin can manage vaccines, create a vaccination record. cliente can only see the vaccination card. one person can have two types of accounts, the person can work on health as a nurse and also need vaccination, no this person can have a admin access and also a client access.
 - started thinking about babies might nove have a cpf yet, how to register them in the system?
+- created boilerplate for validation, mediatr, cqrs and result pattern.
+- wired everything up. found bug for checking if register is deleted or not, because IsDeleted is a computed query, not a column in a row. need to fix it
