@@ -2,7 +2,7 @@
 - Person: the person that receives a Vaccine. Has a system Id, a identifier CPF, for brazilian citizens, and passport number for foreigners. Don´t like that we are using a switch statement for the document validation, depending on the type of the document, might use strategy pattern later thinking when another types of document are added in the system.
 - Vaccine, the vaccine it self with a system id, a name and amount of doses. Right now the doses are only a integer, might create another entity for doses later.
 - VaccinationRecord: the link between a Vaccine and a Person.
-- Every id a UUID V7, wich might help us with idexing when querying the database.
+- Every id is a UUID V7, wich might help us with idexing when querying the database.
 - Every entity has a Id, CreatedAt, UpdatedAt and DeletedAt.
 - Next steps: create repository interfaces, creating databsae infrastucture.
 - The validation might move when FluentValidation is added.
@@ -11,5 +11,7 @@
 - Created unique empty interfaces for specifc entity methods.
 - Using UnitOfWork for atomic actions in the database and for better management of possible future transactions.
 - Next steps: wire with database (SQLite), implement dependecy injection for infrastructure layer, write first unit tests?
-
-
+- Wired db, created migrations, created support scripts for db and migrations management.
+- Next steps: implement CQRS, use MediatR, FluentValidations and Result pattern.
+- Thoughts about auth: implement my own or use a third-party auth service? for study porpuses maybe implement my own, depends on time, need rbac for admin and client access. admin can manage vaccines, create a vaccination record. cliente can only see the vaccination card. one person can have two types of accounts, the person can work on health as a nurse and also need vaccination, no this person can have a admin access and also a client access.
+- started thinking about babies might nove have a cpf yet, how to register them in the system?
