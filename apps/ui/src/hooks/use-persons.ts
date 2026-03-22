@@ -13,6 +13,13 @@ export function usePersons(params?: SieveParams) {
     });
 }
 
+export function useVaccinationCard(personId: string) {
+    return useQuery({
+        queryKey: ["vaccination-card", personId],
+        queryFn: () => personService.getVaccinationCard(personId),
+    });
+}
+
 export function useCreatePerson() {
     const queryClient = useQueryClient();
     return useMutation({

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -291,6 +292,11 @@ export function PersonsPage() {
                   <TableCell>{person.nationality ?? "—"}</TableCell>
                   <TableCell>
                     <div className="flex gap-2">
+                      <Button variant="outline" size="sm" asChild>
+                        <Link to="/persons/$personId" params={{ personId: person.id }}>
+                          View
+                        </Link>
+                      </Button>
                       <Button
                         variant="outline"
                         size="sm"

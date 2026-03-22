@@ -57,3 +57,31 @@ export interface UpdateVaccinePayload {
     name: string;
     requiredDoses: number;
 }
+
+export interface DoseRecord {
+    recordId: string;
+    applicationDate: string;
+}
+
+export interface VaccinationCardEntry {
+    vaccineId: string;
+    vaccineName: string;
+    vaccineCode: string;
+    requiredDoses: number;
+    dosesTaken: number;
+    isComplete: boolean;
+    doses: DoseRecord[];
+}
+
+export interface VaccinationCardResponse {
+    personId: string;
+    personName: string;
+    documentType: string;
+    documentNumber: string;
+    vaccines: VaccinationCardEntry[];
+}
+
+export interface CreateVaccinationRecordPayload {
+    personId: string;
+    vaccineId: string;
+}

@@ -6,6 +6,7 @@ import type {
     CreatePersonPayload,
     UpdatePersonPayload,
     SieveParams,
+    VaccinationCardResponse,
 } from "../types/api";
 
 export const personService = {
@@ -28,6 +29,13 @@ export const personService = {
 
     delete: async (id: string) => {
       const { data } = await api.delete<ApiResponse<null>>(`/Persons/${id}`);
+      return data;
+    },
+
+    getVaccinationCard: async (id: string) => {
+      const { data } = await api.get<ApiResponse<VaccinationCardResponse>>(
+        `/Persons/${id}/vaccination-card`
+      );
       return data;
     },
 };
