@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { getApiErrorMessage } from "@/lib/utils";
 import {
   Table,
   TableBody,
@@ -29,11 +31,18 @@ export function PersonDetailsPage({ personId }: { personId: string }) {
   const handleAddRecord = (vaccineId: string) => {
     createRecord
       .mutateAsync({ personId, vaccineId })
-      .then(() => setAddOpen(false));
+      .then(() => {
+        setAddOpen(false);
+        toast.success("Vaccination record added");
+      })
+      .catch((error) => toast.error(getApiErrorMessage(error)));
   };
 
   const handleDeleteRecord = (recordId: string) => {
-    deleteRecord.mutateAsync(recordId);
+    deleteRecord
+      .mutateAsync(recordId)
+      .then(() => toast.success("Vaccination record removed"))
+      .catch((error) => toast.error(getApiErrorMessage(error)));
   };
 
   if (isLoading) {

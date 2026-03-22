@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { getApiErrorMessage } from "@/lib/utils";
 import {
   Table,
   TableBody,
@@ -207,7 +209,12 @@ export function PersonsPage() {
           nationality: data.nationality,
         });
 
-    mutation.then(() => setFormOpen(false));
+    mutation
+      .then(() => {
+        setFormOpen(false);
+        toast.success(data.id ? "Person updated" : "Person created");
+      })
+      .catch((error) => toast.error(getApiErrorMessage(error)));
   };
 
   const handleSort = (field: string) => {
@@ -222,7 +229,11 @@ export function PersonsPage() {
     if (selectedPerson) {
       deletePerson
         .mutateAsync(selectedPerson.id)
-        .then(() => setDeleteOpen(false));
+        .then(() => {
+          setDeleteOpen(false);
+          toast.success("Person deleted");
+        })
+        .catch((error) => toast.error(getApiErrorMessage(error)));
     }
   };
 

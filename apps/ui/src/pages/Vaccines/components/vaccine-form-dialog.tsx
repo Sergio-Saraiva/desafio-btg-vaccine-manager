@@ -24,6 +24,32 @@ interface VaccineFormDialogProps {
   isLoading?: boolean;
 }
 
+type FormErrors = Partial<Record<"name" | "requiredDoses" | "code", string>>;
+
+function validate(
+  name: string,
+  requiredDoses: string,
+  code: string,
+  isEdit: boolean
+): FormErrors {
+  const errors: FormErrors = {};
+
+  if (!name.trim()) {
+    errors.name = "Name is required";
+  }
+
+  const doses = Number(requiredDoses);
+  if (!requiredDoses || isNaN(doses) || doses < 1) {
+    errors.requiredDoses = "Required doses must be at least 1";
+  }
+
+  if (!isEdit && code && code.length > 20) {
+    errors.code = "Code must be at most 20 characters";
+  }
+
+  return errors;
+}
+
 export function VaccineFormDialog({
   open,
   onOpenChange,
@@ -34,6 +60,7 @@ export function VaccineFormDialog({
   const [name, setName] = useState("");
   const [requiredDoses, setRequiredDoses] = useState("1");
   const [code, setCode] = useState("");
+  const [errors, setErrors] = useState<FormErrors>({});
 
   useEffect(() => {
     if (vaccine) {
@@ -45,14 +72,21 @@ export function VaccineFormDialog({
       setRequiredDoses("1");
       setCode("");
     }
+    setErrors({});
   }, [vaccine, open]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const validationErrors = validate(name, requiredDoses, code, !!vaccine);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+    setErrors({});
     onSubmit({
-      name,
+      name: name.trim(),
       requiredDoses: Number(requiredDoses),
-      ...(!vaccine && code ? { code } : {}),
+      ...(!vaccine && code ? { code: code.trim() } : {}),
       ...(vaccine && { id: vaccine.id }),
     });
   };
@@ -72,8 +106,11 @@ export function VaccineFormDialog({
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              required
+              aria-invalid={!!errors.name}
             />
+            {errors.name && (
+              <p className="text-sm text-destructive">{errors.name}</p>
+            )}
           </div>
           <div className="space-y-2">
             <Label htmlFor="requiredDoses">Required Doses</Label>
@@ -83,8 +120,13 @@ export function VaccineFormDialog({
               min="1"
               value={requiredDoses}
               onChange={(e) => setRequiredDoses(e.target.value)}
-              required
+              aria-invalid={!!errors.requiredDoses}
             />
+            {errors.requiredDoses && (
+              <p className="text-sm text-destructive">
+                {errors.requiredDoses}
+              </p>
+            )}
           </div>
           {!vaccine && (
             <div className="space-y-2">
@@ -94,7 +136,11 @@ export function VaccineFormDialog({
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
                 placeholder="Auto-generated if empty"
+                aria-invalid={!!errors.code}
               />
+              {errors.code && (
+                <p className="text-sm text-destructive">{errors.code}</p>
+              )}
             </div>
           )}
           <DialogFooter>

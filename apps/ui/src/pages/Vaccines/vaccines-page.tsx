@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { getApiErrorMessage } from "@/lib/utils";
 import {
   Table,
   TableBody,
@@ -195,7 +197,12 @@ export function VaccinesPage() {
           code: data.code,
         });
 
-    mutation.then(() => setFormOpen(false));
+    mutation
+      .then(() => {
+        setFormOpen(false);
+        toast.success(data.id ? "Vaccine updated" : "Vaccine created");
+      })
+      .catch((error) => toast.error(getApiErrorMessage(error)));
   };
 
   const handleSort = (field: string) => {
@@ -210,7 +217,11 @@ export function VaccinesPage() {
     if (selectedVaccine) {
       deleteVaccine
         .mutateAsync(selectedVaccine.id)
-        .then(() => setDeleteOpen(false));
+        .then(() => {
+          setDeleteOpen(false);
+          toast.success("Vaccine deleted");
+        })
+        .catch((error) => toast.error(getApiErrorMessage(error)));
     }
   };
 
