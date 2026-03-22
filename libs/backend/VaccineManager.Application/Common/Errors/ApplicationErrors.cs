@@ -30,13 +30,16 @@ public class ApplicationErrors
 
     public static class VaccinationRecord
     {
+        public static ApiError PersonNotFound(Guid id) =>   
+            new(HttpStatusCode.NotFound, $"Person with ID '{id}' was not found.");
+        
+        public static ApiError VaccineNotFound(Guid id) =>
+            new(HttpStatusCode.NotFound, $"Vaccine with ID '{id}' was not found.");
+        
         public static ApiError NotFound(Guid id) =>
             new(HttpStatusCode.NotFound, $"Vaccination record with ID '{id}' was not found.");
 
-        public static ApiError InvalidDose(int max) =>
-            new(HttpStatusCode.BadRequest, $"Dose must be between 1 and {max}.");
-
-        public static ApiError DuplicateDose =>
-            new(HttpStatusCode.Conflict, "This dose has already been administered.");
+        public static ApiError MaxDosesReached =>
+            new(HttpStatusCode.Conflict, "Max amount of doses reached.");
     }
 }

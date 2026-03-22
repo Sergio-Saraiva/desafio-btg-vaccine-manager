@@ -27,3 +27,5 @@
 - after a litte bit of searching, i found out odata would require big changes to the code base and might hurt some architectural decisions. found out about Sieve
 - added sieve.
 - Creating crud for vaccines, will add validation later. same decision to be done about where the validation should be made.
+- thiking of removing column dose number from vaccination record table. and count the amount of thoses based on the amount of rows of a given vaccine.
+- created create and delete actions for vaccination record. removed dose number from vaccination record table. doses are counted dynamically.

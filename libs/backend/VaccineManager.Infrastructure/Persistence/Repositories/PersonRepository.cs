@@ -19,4 +19,11 @@ public class PersonRepository : BaseRepository<Person>, IPersonRepository
                 p.DocumentNumber == documentNumber)
             .FirstOrDefaultAsync();
     }
+
+    public new async Task<Person?> GetByIdAsync(Guid id)
+    {
+        return await _dbSet.Where(p => p.Id == id)
+            .Include(p => p.VaccinationRecords)
+            .FirstOrDefaultAsync();
+    }
 }

@@ -9,13 +9,8 @@ public class VaccinationRecordConfiguration : IEntityTypeConfiguration<Vaccinati
     public void Configure(EntityTypeBuilder<VaccinationRecord> builder)
     {
         builder.HasKey(vr => vr.Id);
-
-        builder.Property(vr => vr.DoseNumber)
-            .IsRequired();
-
         builder.Property(vr => vr.ApplicationDate)
             .IsRequired();
-
         builder.Property(vr => vr.CreatedAt).IsRequired();
         builder.Property(vr => vr.UpdatedAt).IsRequired(false);
         builder.Property(vr => vr.DeletedAt).IsRequired(false);
