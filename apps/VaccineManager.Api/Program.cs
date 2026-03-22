@@ -19,6 +19,15 @@ public class Program
         builder.Services.AddSwaggerGen();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.RegisterServices(builder.Configuration);
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowWebClient", policy =>
+            {
+                policy.WithOrigins("http://localhost:5173")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+        });
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -35,6 +44,8 @@ public class Program
                 await Task.CompletedTask;
             });
         }
+        
+        app.UseCors("AllowWebClient");
 
         app.UseExceptionHandler();
         app.UseHttpsRedirection();

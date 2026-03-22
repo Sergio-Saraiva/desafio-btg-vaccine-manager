@@ -27,7 +27,7 @@ namespace VaccineManager.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(ApiResponse<List<ListPersonsResponse>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse<PagedResponse<ListPersonsResponse>>), StatusCodes.Status200OK)]
         public async Task<IActionResult> List([FromQuery] SieveModel sieveModel)
         {
             return await SendRequest(new ListPersonsQuery(sieveModel));
