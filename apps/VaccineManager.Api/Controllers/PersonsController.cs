@@ -35,7 +35,7 @@ namespace VaccineManager.Api.Controllers
             return await SendRequest(command);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var command = new DeletePersonCommand(id);

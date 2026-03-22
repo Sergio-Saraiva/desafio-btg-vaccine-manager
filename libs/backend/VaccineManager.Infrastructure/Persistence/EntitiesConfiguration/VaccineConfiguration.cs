@@ -16,6 +16,12 @@ public class VaccineConfiguration : IEntityTypeConfiguration<Vaccine>
         builder.HasMany(v => v.VaccinationRecords).WithOne(v => v.Vaccine)
             .HasForeignKey(v => v.VaccineId).OnDelete(DeleteBehavior.NoAction);
         
+        builder.Property(v => v.Code)
+            .IsRequired()                                                                                                           
+            .HasMaxLength(20);                                                                                                      
+        builder.HasIndex(v => v.Code)                                                                                               
+            .IsUnique();
+        
         builder.Property(v => v.CreatedAt).IsRequired();
         builder.Property(v => v.UpdatedAt).IsRequired(false);
         builder.Property(v => v.DeletedAt).IsRequired(false);

@@ -20,6 +20,9 @@ public class ApplicationErrors
 
         public static ApiError DuplicateName =>
             new(HttpStatusCode.Conflict, "A vaccine with this name already exists.");
+        
+        public static ApiError DuplicateCode => 
+            new(HttpStatusCode.Conflict, "A vaccine with this code already exists.");
 
         public static ApiError HasRecords =>
             new(HttpStatusCode.Conflict, "Cannot delete a vaccine that has vaccination records.");
