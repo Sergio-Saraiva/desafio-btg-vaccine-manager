@@ -1,6 +1,7 @@
 using FluentResults;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using VaccineManager.Application.Common;
 using VaccineManager.Application.Common.Errors;
 
 namespace VaccineManager.Api.Controllers;
@@ -21,36 +22,40 @@ public class ApiBaseController : ControllerBase
         var result = await _sender.Send(request);
 
         if (result.IsSuccess)
-        {
-            return StatusCode(successStatusCode, result.Value);
-        }
+            return StatusCode(successStatusCode, ApiResponse.Success(result.Value));
 
+        return HandleError(result);
+    }
+
+    protected async Task<IActionResult> SendRequest(
+        IRequest<Result> request,
+        int successStatusCode = StatusCodes.Status204NoContent)
+    {
+        var result = await _sender.Send(request);
+
+        if (result.IsSuccess)
+            return StatusCode(successStatusCode, ApiResponse.Success());
+
+        return HandleError(result);
+    }
+
+    private IActionResult HandleError(ResultBase result)
+    {
         var error = result.Errors.FirstOrDefault();
 
         if (error is ValidationApiError validationError)
         {
-            return StatusCode(StatusCodes.Status422UnprocessableEntity, new ProblemDetails
-            {
-                Title = "Validation Error",
-                Status = StatusCodes.Status422UnprocessableEntity,
-                Extensions = { { "errors", validationError.Failures } }
-            });
+            return StatusCode(StatusCodes.Status422UnprocessableEntity, ApiResponse.Failure(
+                string.Join("; ", validationError.Failures
+                    .SelectMany(f => f.Value.Select(msg => $"{f.Key}: {msg}")))));
         }
 
         if (error is ApiError apiError)
         {
-            return StatusCode((int)apiError.StatusCode, new ProblemDetails
-            {
-                Title = apiError.Message,
-                Status = (int)apiError.StatusCode,
-                Detail = apiError.Message
-            });
+            return StatusCode((int)apiError.StatusCode, ApiResponse.Failure(apiError.Message));
         }
 
-        return StatusCode(StatusCodes.Status500InternalServerError, new ProblemDetails
-        {
-            Title = "Internal Server Error",
-            Status = StatusCodes.Status500InternalServerError
-        });
+        return StatusCode(StatusCodes.Status500InternalServerError,
+            ApiResponse.Failure("Internal Server Error"));
     }
 }

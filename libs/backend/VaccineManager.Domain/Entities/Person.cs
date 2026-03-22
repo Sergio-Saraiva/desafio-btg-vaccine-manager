@@ -21,6 +21,14 @@ public class Person : BaseEntity
         Nationality = nationality;
     }
     
+    public void Update(string name, DocumentType documentType, string documentNumber, string? nationality)
+    {
+        Name = name;
+        DocumentType = documentType;
+        DocumentNumber = ValidateDocument(documentType, documentNumber);
+        Nationality = nationality;
+    }
+    
     private static string ValidateDocument(DocumentType type, string number)
     {
         if (string.IsNullOrWhiteSpace(number))

@@ -17,3 +17,9 @@
 - started thinking about babies might nove have a cpf yet, how to register them in the system?
 - created boilerplate for validation, mediatr, cqrs and result pattern.
 - wired everything up. found bug for checking if register is deleted or not, because IsDeleted is a computed query, not a column in a row. need to fix it
+- Fixed IsDeleted bug. Now the IsDeleted property is computed automatically.
+- Thinking about scale, might add a memory cache for generating the vaccination cards. And separate the db, into a write db and read db to fully apply CQRS.
+- Base crud for PERSON ENTITY done, might have some issues with edge cases, some was already identified. Problably start working in the UI now. I want to wrap the responses in a object containing a isSuccess, ResponseData, error messages.
+- created a wrapper for the responses.
+- created a global excpetion handler for unexpected errors outside mediatR pipeline. create a exception behavior for unexcpeted errors inside the mediatr pipeline.
+- there are two validation occurring when creating and updating a person, in the DOmain layer and in the Application Layer. We must choose where to keep it. if the application will be used only using http, we must keep it only in the application layer using fluent validation. might deal with this later.

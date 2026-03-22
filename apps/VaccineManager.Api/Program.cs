@@ -1,3 +1,4 @@
+using VaccineManager.Api.Middlewares;
 using VaccineManager.Application.Common.Settings;
 using VaccineManager.IOC;
 
@@ -12,7 +13,7 @@ public class Program
             builder.Configuration
         );
         // Add services to the container.
-
+        builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
         builder.Services.AddControllers();
         builder.Services.AddSwaggerGen();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -34,11 +35,9 @@ public class Program
             });
         }
 
+        app.UseExceptionHandler();
         app.UseHttpsRedirection();
-
-        app.UseAuthorization();
-
-
+        app.UseAuthorization(); 
         app.MapControllers();
 
         app.Run();
