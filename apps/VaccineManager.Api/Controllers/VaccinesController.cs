@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Sieve.Models;
+using VaccineManager.Application.Common;
 using VaccineManager.Application.Vaccines.Commands.CreateVaccine;
 using VaccineManager.Application.Vaccines.Commands.DeleteVaccine;
 using VaccineManager.Application.Vaccines.Commands.UpdateVaccine;
@@ -17,12 +18,15 @@ namespace VaccineManager.Api.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(ApiResponse<CreateVaccineResponse>), StatusCodes.Status200OK)]                         
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> Create([FromBody] CreateVaccineCommand command)
         {
             return await SendRequest(command);
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(ApiResponse<List<ListVaccineResponse>>), StatusCodes.Status200OK)]
         public async Task<IActionResult> List([FromQuery] SieveModel sieveModel)
         {
             var query = new ListVaccineQuery(sieveModel);
@@ -30,12 +34,17 @@ namespace VaccineManager.Api.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType(typeof(ApiResponse<UpdateVaccineResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status422UnprocessableEntity)]   
         public async Task<IActionResult> Update([FromBody] UpdateVaccineCommand command)
         {
             return await SendRequest(command);
         }
 
         [HttpDelete("{id:guid}")]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)] 
         public async Task<IActionResult> Delete(Guid id)
         {
             var command = new DeleteVaccineCommand(id);

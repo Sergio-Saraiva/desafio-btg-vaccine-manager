@@ -31,3 +31,5 @@
 - created create and delete actions for vaccination record. removed dose number from vaccination record table. doses are counted dynamically.
 - creating the vaccination card. still need to add caching!
 - will start working in the ui now. still with auth in my mind.
+- after creating a base ui will work on hardening.
+- documented api in swagger with mapped responses
