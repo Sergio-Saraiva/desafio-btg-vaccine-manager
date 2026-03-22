@@ -23,3 +23,6 @@
 - created a wrapper for the responses.
 - created a global excpetion handler for unexpected errors outside mediatR pipeline. create a exception behavior for unexcpeted errors inside the mediatr pipeline.
 - there are two validation occurring when creating and updating a person, in the DOmain layer and in the Application Layer. We must choose where to keep it. if the application will be used only using http, we must keep it only in the application layer using fluent validation. might deal with this later.
+- thinking of adding odata (or any other method) to help query the database with complex filters.
+- after a litte bit of searching, i found out odata would require big changes to the code base and might hurt some architectural decisions. found out about Sieve
+- added sieve.

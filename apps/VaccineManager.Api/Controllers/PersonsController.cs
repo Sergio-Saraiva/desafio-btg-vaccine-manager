@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Sieve.Models;
 using VaccineManager.Application.Persons.Commands.CreatePerson;
 using VaccineManager.Application.Persons.Commands.DeletePerson;
 using VaccineManager.Application.Persons.Commands.UpdatePerson;
@@ -23,9 +24,9 @@ namespace VaccineManager.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List([FromQuery] SieveModel sieveModel)
         {
-            return await SendRequest(new ListPersonsQuery());
+            return await SendRequest(new ListPersonsQuery(sieveModel));
         }
 
         [HttpPut]

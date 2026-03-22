@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Sieve.Models;
+using Sieve.Services;
 using VaccineManager.Application.Common.Settings;
 using VaccineManager.Domain.Repositories;
 using VaccineManager.Infrastructure.Persistence.Context;
 using VaccineManager.Infrastructure.Persistence.Repositories;
+using VaccineManager.Infrastructure.Persistence.Sieve;
 
 namespace VaccineManager.Infrastructure;
 
@@ -17,7 +20,14 @@ public static class DependencyInjection
                 b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)
             )
         );
-
+        
+        services.Configure<SieveOptions>(options =>
+        {
+            options.MaxPageSize = appSettings.SieveSettings.MaxPageSize;
+            options.DefaultPageSize = appSettings.SieveSettings.DefaultPageSize;
+        });
+        services.AddScoped<ISieveProcessor, SieveProcessor>();
+        services.AddScoped<ISieveProcessor, AppSieveProcessor>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IPersonRepository, PersonRepository>();
         services.AddScoped<IVaccineRepository, VaccineRepository>();
