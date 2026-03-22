@@ -33,3 +33,6 @@
 - will start working in the ui now. still with auth in my mind.
 - after creating a base ui will work on hardening.
 - documented api in swagger with mapped responses
+- base ui is done, we can make all crud actions implememnted by the API. now will focus on unit testing the api. 
+- will remove validation from domain. validation will only be made by fluent validation.
+- started thinking about authentication 
