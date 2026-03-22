@@ -4,6 +4,7 @@ using Sieve.Models;
 using VaccineManager.Application.Persons.Commands.CreatePerson;
 using VaccineManager.Application.Persons.Commands.DeletePerson;
 using VaccineManager.Application.Persons.Commands.UpdatePerson;
+using VaccineManager.Application.Persons.Queries.GetPersonVaccinationCard;
 using VaccineManager.Application.Persons.Queries.ListPersons;
 
 namespace VaccineManager.Api.Controllers
@@ -26,6 +27,13 @@ namespace VaccineManager.Api.Controllers
         public async Task<IActionResult> List([FromQuery] SieveModel sieveModel)
         {
             return await SendRequest(new ListPersonsQuery(sieveModel));
+        }
+
+        [HttpGet("{id:guid}/vaccination-card")]
+        public async Task<IActionResult> GetVaccinationCard([FromRoute] Guid id)
+        {
+            var query = new GetPersonVaccinationCardQuery(id);
+            return await SendRequest(query);
         }
 
         [HttpPut]

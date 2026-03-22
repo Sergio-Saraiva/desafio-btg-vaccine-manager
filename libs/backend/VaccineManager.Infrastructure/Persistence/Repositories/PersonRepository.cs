@@ -24,6 +24,7 @@ public class PersonRepository : BaseRepository<Person>, IPersonRepository
     {
         return await _dbSet.Where(p => p.Id == id)
             .Include(p => p.VaccinationRecords)
+            .ThenInclude(vr => vr.Vaccine)
             .FirstOrDefaultAsync();
     }
 }

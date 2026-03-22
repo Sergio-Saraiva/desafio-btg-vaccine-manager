@@ -29,3 +29,5 @@
 - Creating crud for vaccines, will add validation later. same decision to be done about where the validation should be made.
 - thiking of removing column dose number from vaccination record table. and count the amount of thoses based on the amount of rows of a given vaccine.
 - created create and delete actions for vaccination record. removed dose number from vaccination record table. doses are counted dynamically.
+- creating the vaccination card. still need to add caching!
+- will start working in the ui now. still with auth in my mind.
