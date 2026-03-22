@@ -37,3 +37,23 @@ export interface PagedResponse<T> {
     totalCount: number;
     totalPages: number;
 }
+
+export interface Vaccine {
+    id: string;
+    name: string;
+    requiredDoses: number;
+    code: string;
+    createdAt: string;
+}
+
+export interface CreateVaccinePayload {
+    name: string;
+    requiredDoses: number;
+    code?: string;
+}
+
+export interface UpdateVaccinePayload {
+    id: string;
+    name: string;
+    requiredDoses: number;
+}

@@ -13,7 +13,14 @@ import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
                 className="text-sm text-muted-foreground hover:text-foreground [&.active]:text-foreground                     
   [&.active]:font-medium"                                                                                                     
               >                                                                                                               
-                Persons                                                                                                       
+                Persons
+              </Link>
+              <Link
+                to="/vaccines"
+                className="text-sm text-muted-foreground hover:text-foreground [&.active]:text-foreground
+[&.active]:font-medium"
+              >
+                Vaccines
               </Link>
             </nav>
           </div>

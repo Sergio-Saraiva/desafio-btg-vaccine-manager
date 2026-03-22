@@ -33,8 +33,8 @@ import { useEffect, useState } from "react";
   }
 
   const DOCUMENT_TYPES = [
-    { value: "0", label: "CPF" },
-    { value: "1", label: "Passport" },
+    { value: "1", label: "CPF" },
+    { value: "2", label: "Passport" },
   ];
 
   export function PersonFormDialog({
@@ -45,19 +45,19 @@ import { useEffect, useState } from "react";
     isLoading,
   }: PersonFormDialogProps) {
     const [name, setName] = useState("");
-    const [documentType, setDocumentType] = useState("0");
+    const [documentType, setDocumentType] = useState("1");
     const [documentNumber, setDocumentNumber] = useState("");
     const [nationality, setNationality] = useState("");
 
     useEffect(() => {
       if (person) {
         setName(person.name);
-        setDocumentType(person.documentType === "Cpf" ? "0" : "1");
+        setDocumentType(person.documentType === "Cpf" ? "1" : "2");
         setDocumentNumber(person.documentNumber);
         setNationality(person.nationality ?? "");
       } else {
         setName("");
-        setDocumentType("0");
+        setDocumentType("1");
         setDocumentNumber("");
         setNationality("");
       }
