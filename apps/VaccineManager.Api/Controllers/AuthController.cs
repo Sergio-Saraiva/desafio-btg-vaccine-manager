@@ -28,7 +28,7 @@ namespace VaccineManager.Api.Controllers
 
         [HttpPost("signin")]
         [ProducesResponseType(typeof(ApiResponse<SignInQueryResponse>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status409Conflict)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> SignIn([FromBody] SignInQuery query)
         {
             return await SendRequest(query);
