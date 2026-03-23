@@ -1,5 +1,11 @@
 import { createFileRoute, Navigate } from "@tanstack/react-router";
-                                                                                                                              
-  export const Route = createFileRoute("/")({                                                                                 
-    component: () => <Navigate to="/persons" />,                                                                              
-  });  
+import { isAuthenticated } from "@/lib/auth";
+
+export const Route = createFileRoute("/")({
+  component: () =>
+    isAuthenticated() ? (
+      <Navigate to="/persons" />
+    ) : (
+      <Navigate to="/sign-in" />
+    ),
+});

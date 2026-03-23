@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VaccinesRouteImport } from './routes/vaccines'
+import { Route as SignUpRouteImport } from './routes/sign-up'
+import { Route as SignInRouteImport } from './routes/sign-in'
 import { Route as PersonsRouteImport } from './routes/persons'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PersonsIndexRouteImport } from './routes/persons.index'
@@ -18,6 +20,16 @@ import { Route as PersonsPersonIdRouteImport } from './routes/persons.$personId'
 const VaccinesRoute = VaccinesRouteImport.update({
   id: '/vaccines',
   path: '/vaccines',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignUpRoute = SignUpRouteImport.update({
+  id: '/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignInRoute = SignInRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PersonsRoute = PersonsRouteImport.update({
@@ -44,12 +56,16 @@ const PersonsPersonIdRoute = PersonsPersonIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/persons': typeof PersonsRouteWithChildren
+  '/sign-in': typeof SignInRoute
+  '/sign-up': typeof SignUpRoute
   '/vaccines': typeof VaccinesRoute
   '/persons/$personId': typeof PersonsPersonIdRoute
   '/persons/': typeof PersonsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/sign-in': typeof SignInRoute
+  '/sign-up': typeof SignUpRoute
   '/vaccines': typeof VaccinesRoute
   '/persons/$personId': typeof PersonsPersonIdRoute
   '/persons': typeof PersonsIndexRoute
@@ -58,19 +74,36 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/persons': typeof PersonsRouteWithChildren
+  '/sign-in': typeof SignInRoute
+  '/sign-up': typeof SignUpRoute
   '/vaccines': typeof VaccinesRoute
   '/persons/$personId': typeof PersonsPersonIdRoute
   '/persons/': typeof PersonsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/persons' | '/vaccines' | '/persons/$personId' | '/persons/'
+  fullPaths:
+    | '/'
+    | '/persons'
+    | '/sign-in'
+    | '/sign-up'
+    | '/vaccines'
+    | '/persons/$personId'
+    | '/persons/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/vaccines' | '/persons/$personId' | '/persons'
+  to:
+    | '/'
+    | '/sign-in'
+    | '/sign-up'
+    | '/vaccines'
+    | '/persons/$personId'
+    | '/persons'
   id:
     | '__root__'
     | '/'
     | '/persons'
+    | '/sign-in'
+    | '/sign-up'
     | '/vaccines'
     | '/persons/$personId'
     | '/persons/'
@@ -79,6 +112,8 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PersonsRoute: typeof PersonsRouteWithChildren
+  SignInRoute: typeof SignInRoute
+  SignUpRoute: typeof SignUpRoute
   VaccinesRoute: typeof VaccinesRoute
 }
 
@@ -89,6 +124,20 @@ declare module '@tanstack/react-router' {
       path: '/vaccines'
       fullPath: '/vaccines'
       preLoaderRoute: typeof VaccinesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sign-up': {
+      id: '/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof SignUpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sign-in': {
+      id: '/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof SignInRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/persons': {
@@ -138,6 +187,8 @@ const PersonsRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PersonsRoute: PersonsRouteWithChildren,
+  SignInRoute: SignInRoute,
+  SignUpRoute: SignUpRoute,
   VaccinesRoute: VaccinesRoute,
 }
 export const routeTree = rootRouteImport

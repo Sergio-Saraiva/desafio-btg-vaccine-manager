@@ -85,3 +85,13 @@ export interface CreateVaccinationRecordPayload {
     personId: string;
     vaccineId: string;
 }
+
+export interface SignInResponse {
+    email: string;
+    accessToken: string;
+}
+
+export interface CreateUserResponse {
+    id: string;
+    email: string;
+}
