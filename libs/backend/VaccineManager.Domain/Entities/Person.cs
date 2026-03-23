@@ -17,7 +17,7 @@ public class Person : BaseEntity
         Id = Guid.CreateVersion7();
         Name = name;
         DocumentType = documentType;
-        DocumentNumber = ValidateDocument(documentType, documentNumber);
+        DocumentNumber = documentNumber;
         Nationality = nationality;
     }
     
@@ -25,39 +25,7 @@ public class Person : BaseEntity
     {
         Name = name;
         DocumentType = documentType;
-        DocumentNumber = ValidateDocument(documentType, documentNumber);
+        DocumentNumber = documentNumber;
         Nationality = nationality;
-    }
-    
-    private static string ValidateDocument(DocumentType type, string number)
-    {
-        if (string.IsNullOrWhiteSpace(number))
-            throw new ArgumentException("Document number is required.");
-
-        var cleaned = number.Trim();
-
-        return type switch
-        {
-            DocumentType.Cpf => ValidateCpf(cleaned),
-            DocumentType.Passport => ValidatePassport(cleaned),
-            _ => throw new ArgumentException($"Unknown document type: {type}")
-        };
-    }
-
-    private static string ValidateCpf(string cpf)
-    {
-        var digits = new string(cpf.Where(char.IsDigit).ToArray());
-
-        return digits.Length != 11 ? throw new ArgumentException("CPF must have exactly 11 digits.") : digits;
-    }
-
-    private static string ValidatePassport(string passport)
-    {
-        var cleaned = passport.Trim().ToUpperInvariant();
-
-        if (cleaned.Length < 6 || cleaned.Length > 15)
-            throw new ArgumentException("Passport number must be between 6 and 15 characters.");
-
-        return cleaned;
     }
 }

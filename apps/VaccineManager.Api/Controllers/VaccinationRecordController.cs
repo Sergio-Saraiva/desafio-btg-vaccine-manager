@@ -1,7 +1,6 @@
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using VaccineManager.Application.Common;
+using VaccineManager.Application.Common.Responses;
 using VaccineManager.Application.VaccinationRecord.CreateVaccinationRecord;
 using VaccineManager.Application.VaccinationRecord.DeleteVaccinationRecord;
 

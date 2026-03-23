@@ -1,6 +1,7 @@
 using FluentResults;
 using VaccineManager.Application.Abstractions.Messaging;
 using VaccineManager.Application.Common.Errors;
+using VaccineManager.Application.Common.Sanitizers;
 using VaccineManager.Domain.Entities;
 using VaccineManager.Domain.Repositories;
 
@@ -19,7 +20,8 @@ public class CreatePersonCommandHandler : ICommandHandler<CreatePersonCommand, C
 
     public async Task<Result<CreatePersonResponse>> Handle(CreatePersonCommand request, CancellationToken cancellationToken)
     {
-        var existingPerson = await _personRepository.GetByDocumentAsync(request.DocumentType, request.DocumentNumber);
+        var sanitizedDocument = DocumentSanitizerFactory.GetSanitizer(request.DocumentType).Sanitize(request.DocumentNumber);
+        var existingPerson = await _personRepository.GetByDocumentAsync(request.DocumentType, sanitizedDocument);
 
         if (existingPerson != null)
         {

@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Sieve.Models;
-using VaccineManager.Application.Common;
+using VaccineManager.Application.Common.Responses;
 using VaccineManager.Application.Persons.Commands.CreatePerson;
 using VaccineManager.Application.Persons.Commands.DeletePerson;
 using VaccineManager.Application.Persons.Commands.UpdatePerson;

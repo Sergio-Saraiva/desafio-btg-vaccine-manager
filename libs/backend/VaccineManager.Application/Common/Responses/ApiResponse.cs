@@ -1,4 +1,4 @@
-namespace VaccineManager.Application.Common;
+namespace VaccineManager.Application.Common.Responses;
 
 public class ApiResponse
 {

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Diagnostics;
-using VaccineManager.Application.Common;
+using VaccineManager.Application.Common.Responses;
 
 namespace VaccineManager.Api.Middlewares;
 

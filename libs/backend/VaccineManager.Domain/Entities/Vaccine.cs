@@ -12,19 +12,13 @@ public class Vaccine : BaseEntity
         Id = Guid.CreateVersion7();
         Name = name;
         Code = string.IsNullOrEmpty(code) ? GenerateVaccineHumanReadableCode(this.Id) : code;
-        RequiredDoses = ValidateDoses(requiredDoses);
+        RequiredDoses = requiredDoses;
     }
-
-    private static int ValidateDoses(int requiredDoses)
-    {
-        return requiredDoses > 0 ? requiredDoses
-            : throw new ArgumentException("RequiredDoses must be at least 1.");
-    }
-
+    
     public void Update(string name, int requiredDoses)
     {
         Name = name;
-        RequiredDoses = ValidateDoses(requiredDoses);
+        RequiredDoses = requiredDoses;
     }
 
     private static string GenerateVaccineHumanReadableCode(Guid vaccineId)

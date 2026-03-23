@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 using Sieve.Models;
 using Sieve.Services;
 using VaccineManager.Application.Abstractions.Messaging;
-using VaccineManager.Application.Common;
+using VaccineManager.Application.Common.Responses;
 using VaccineManager.Domain.Repositories;
 
 namespace VaccineManager.Application.Persons.Queries.ListPersons;

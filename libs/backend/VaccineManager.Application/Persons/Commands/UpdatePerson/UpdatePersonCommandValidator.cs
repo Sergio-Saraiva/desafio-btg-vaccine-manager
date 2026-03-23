@@ -1,5 +1,5 @@
 using FluentValidation;
-using VaccineManager.Domain.Enums;
+using VaccineManager.Application.Common.Validation;
 
 namespace VaccineManager.Application.Persons.Commands.UpdatePerson;
 
@@ -18,15 +18,11 @@ public class UpdatePersonCommandValidator : AbstractValidator<UpdatePersonComman
             .NotEmpty().WithMessage("Document number is required.")
             .MaximumLength(20).WithMessage("Document number must not exceed 20 characters.");
 
-        RuleFor(x => x.DocumentNumber)
-            .Must(cpf => cpf.Where(char.IsDigit).Count() == 11)
-            .When(x => x.DocumentType == DocumentType.Cpf)
-            .WithMessage("CPF must have exactly 11 digits.");
-
-        RuleFor(x => x.DocumentNumber)
-            .Length(6, 15)
-            .When(x => x.DocumentType == DocumentType.Passport)
-            .WithMessage("Passport number must be between 6 and 15 characters.");
+        RuleFor(x => x)
+            .Must(x => DocumentValidatorFactory.GetValidator(x.DocumentType).Validate(x.DocumentNumber).IsSuccess)
+            .When(x => !string.IsNullOrEmpty(x.DocumentNumber))
+            .WithMessage((x, _) => DocumentValidatorFactory.GetValidator(x.DocumentType).Validate(x.DocumentNumber).Errors.FirstOrDefault()?.Message ?? "Invalid document number.")
+            .OverridePropertyName("DocumentNumber");
 
         RuleFor(x => x.Nationality)
             .MaximumLength(100).WithMessage("Nationality must not exceed 100 characters.")

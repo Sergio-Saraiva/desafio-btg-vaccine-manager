@@ -1,8 +1,8 @@
 using FluentResults;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using VaccineManager.Application.Common;
 using VaccineManager.Application.Common.Errors;
+using VaccineManager.Application.Common.Responses;
 
 namespace VaccineManager.Api.Controllers;
 

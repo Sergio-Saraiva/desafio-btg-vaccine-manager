@@ -37,3 +37,6 @@
 - will remove validation from domain. validation will only be made by fluent validation.
 - started thinking about authentication 
 - testing application layer handlers
+- testing application layer validators.
+- using strategy pattern to validate different types of documents and make it easier to add new types of documents in the future.
+- sanitizing documents number before iserting it in the db.
