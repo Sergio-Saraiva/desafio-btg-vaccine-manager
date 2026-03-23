@@ -36,3 +36,4 @@
 - base ui is done, we can make all crud actions implememnted by the API. now will focus on unit testing the api. 
 - will remove validation from domain. validation will only be made by fluent validation.
 - started thinking about authentication 
+- testing application layer handlers

@@ -25,7 +25,7 @@ public class DeletePersonCommandHandler : ICommandHandler<DeletePersonCommand>
         }
         
         _personRepository.Delete(person);
-        _unitOfWork.SaveChangesAsync(cancellationToken);
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return Result.Ok();
     }
 }
