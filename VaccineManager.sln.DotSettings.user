@@ -18,5 +18,7 @@
     &lt;TestId&gt;xUnit::74BC1314-C69B-4442-B39A-D5ED33B101CA::net10.0::VaccineManager.Application.Tests.Persons.Queries.GetPersonVaccinationCardQueryHandlerTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::74BC1314-C69B-4442-B39A-D5ED33B101CA::net10.0::VaccineManager.Application.Tests.Persons.Validators.UpdatePersonCommandValidatorTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::74BC1314-C69B-4442-B39A-D5ED33B101CA::net10.0::VaccineManager.Application.Tests.Persons.Validators.CreatePersonCommandValidatorTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::74BC1314-C69B-4442-B39A-D5ED33B101CA::net10.0::VaccineManager.Application.Tests.Vaccines.Validators.UpdateVaccineCommandValidatorTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::74BC1314-C69B-4442-B39A-D5ED33B101CA::net10.0::VaccineManager.Application.Tests.Vaccines.Validators.CreateVaccineCommandValidatorTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

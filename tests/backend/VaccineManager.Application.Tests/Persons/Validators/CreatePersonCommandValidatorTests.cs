@@ -7,9 +7,7 @@ namespace VaccineManager.Application.Tests.Persons.Validators;
 public class CreatePersonCommandValidatorTests
 {
     private readonly CreatePersonCommandValidator _sut = new();
-
-    // --- Name rules ---
-
+    
     [Fact]
     public async Task Validate_EmptyName_ReturnsError()
     {
@@ -29,9 +27,7 @@ public class CreatePersonCommandValidatorTests
         result.IsValid.Should().BeFalse();
         result.Errors.Should().Contain(e => e.PropertyName == "Name");
     }
-
-    // --- CPF rules ---
-
+    
     [Fact]
     public async Task Validate_ValidCpf_ReturnsValid()
     {
@@ -70,9 +66,7 @@ public class CreatePersonCommandValidatorTests
         result.IsValid.Should().BeFalse();
         result.Errors.Should().Contain(e => e.PropertyName == "DocumentNumber");
     }
-
-    // --- Passport rules ---
-
+    
     [Fact]
     public async Task Validate_ValidPassport_ReturnsValid()
     {
@@ -111,9 +105,7 @@ public class CreatePersonCommandValidatorTests
         result.IsValid.Should().BeFalse();
         result.Errors.Should().Contain(e => e.PropertyName == "DocumentNumber");
     }
-
-    // --- Document number empty ---
-
+    
     [Fact]
     public async Task Validate_EmptyDocumentNumber_ReturnsError()
     {
