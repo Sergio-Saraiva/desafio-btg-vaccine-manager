@@ -1,6 +1,8 @@
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi;
 using VaccineManager.Api.Middlewares;
 using VaccineManager.Application.Common.Settings;
+using VaccineManager.Infrastructure.Persistence;
 using VaccineManager.IOC;
 
 namespace VaccineManager.Api;
@@ -44,6 +46,15 @@ public class Program
             });
         });
         var app = builder.Build();
+
+        // Sync write DB → read DB on startup so queries work before the first write
+        using (var scope = app.Services.CreateScope())
+        {
+            var settings = scope.ServiceProvider.GetRequiredService<IOptions<AppSettings>>().Value;
+            DatabaseSync.SyncWriteToRead(
+                settings.SQLiteSettings.ConnectionString,
+                settings.SQLiteSettings.ReadConnectionString);
+        }
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

@@ -1,5 +1,7 @@
 using FluentResults;
+using Microsoft.Extensions.DependencyInjection;
 using VaccineManager.Application.Abstractions.Messaging;
+using VaccineManager.Application.Common.Constants;
 using VaccineManager.Application.Common.Errors;
 using VaccineManager.Application.Common.Sanitizers;
 using VaccineManager.Domain.Entities;
@@ -12,7 +14,7 @@ public class CreatePersonCommandHandler : ICommandHandler<CreatePersonCommand, C
     private readonly IPersonRepository _personRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CreatePersonCommandHandler(IPersonRepository personRepository, IUnitOfWork unitOfWork)
+    public CreatePersonCommandHandler([FromKeyedServices(DbContextKeys.Write)] IPersonRepository personRepository, IUnitOfWork unitOfWork)
     {
         _personRepository = personRepository;
         _unitOfWork = unitOfWork;

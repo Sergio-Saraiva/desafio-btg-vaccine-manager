@@ -13,4 +13,5 @@ echo "Nota: Se isso falhar, é porque a migração já foi aplicada no banco. Us
 
 dotnet ef migrations remove \
     --project "$INFRA_PROJECT" \
-    --startup-project "$STARTUP_PROJECT" -v
+    --startup-project "$STARTUP_PROJECT" \
+    --context WriteDbContext -v

@@ -10,7 +10,7 @@ using VaccineManager.Infrastructure.Persistence.Context;
 
 namespace VaccineManager.Infrastructure.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(WriteDbContext))]
     [Migration("20260323171653_UniqueDocumentNowFilterDeleteAtAsNull")]
     partial class UniqueDocumentNowFilterDeleteAtAsNull
     {

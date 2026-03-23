@@ -23,7 +23,7 @@ public class SignInQueryHandlerTests
     }
 
     [Fact]
-    public async Task Handle_UserNotFound_ReturnsFailWithConflict()
+    public async Task Handle_UserNotFound_ReturnsFailWithUnauthorized()
     {
         // Arrange
         var query = new SignInQuery("john@email.com", "Password123");
@@ -37,11 +37,11 @@ public class SignInQueryHandlerTests
         result.IsFailed.Should().BeTrue();
         result.Errors.Should().ContainSingle()
             .Which.Should().BeOfType<ApiError>()
-            .Which.StatusCode.Should().Be(HttpStatusCode.Conflict);
+            .Which.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
 
     [Fact]
-    public async Task Handle_InvalidPassword_ReturnsFailWithConflict()
+    public async Task Handle_InvalidPassword_ReturnsFailWithUnauthorized()
     {
         // Arrange
         var query = new SignInQuery("john@email.com", "WrongPassword");
@@ -58,7 +58,7 @@ public class SignInQueryHandlerTests
         result.IsFailed.Should().BeTrue();
         result.Errors.Should().ContainSingle()
             .Which.Should().BeOfType<ApiError>()
-            .Which.StatusCode.Should().Be(HttpStatusCode.Conflict);
+            .Which.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
 
     [Fact]

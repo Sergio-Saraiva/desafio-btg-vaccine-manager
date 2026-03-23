@@ -21,7 +21,8 @@ echo -e "${GREEN}Criando migração '$1'...${NC}"
 
 dotnet ef migrations add "$1" \
     --project "$INFRA_PROJECT" \
-    --startup-project "$STARTUP_PROJECT" -v
+    --startup-project "$STARTUP_PROJECT" \
+    --context WriteDbContext -v
 
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}Migração criada com sucesso! Não esqueça de rodar o db-update.${NC}"

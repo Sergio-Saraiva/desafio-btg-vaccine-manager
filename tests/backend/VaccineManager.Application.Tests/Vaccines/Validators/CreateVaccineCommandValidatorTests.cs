@@ -1,6 +1,5 @@
 using FluentAssertions;
 using VaccineManager.Application.Vaccines.Commands.CreateVaccine;
-using VaccineManager.Domain.Entities;
 
 namespace VaccineManager.Application.Tests.Vaccines.Validators;
 
@@ -78,7 +77,7 @@ public class CreateVaccineCommandValidatorTests
 
     private static void SetRequiredDoses(CreateVaccineCommand vaccine, int value)
     {
-        typeof(Vaccine).GetProperty(nameof(Vaccine.RequiredDoses))!
+        typeof(CreateVaccineCommand).GetProperty(nameof(CreateVaccineCommand.RequiredDoses))!
             .SetValue(vaccine, value);
     }
 }

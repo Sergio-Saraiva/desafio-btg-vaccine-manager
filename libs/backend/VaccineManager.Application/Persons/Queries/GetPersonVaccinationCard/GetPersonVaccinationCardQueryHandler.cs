@@ -1,5 +1,7 @@
 using FluentResults;
+using Microsoft.Extensions.DependencyInjection;
 using VaccineManager.Application.Abstractions.Messaging;
+using VaccineManager.Application.Common.Constants;
 using VaccineManager.Application.Common.Errors;
 using VaccineManager.Domain.Repositories;
 
@@ -9,7 +11,7 @@ public class GetPersonVaccinationCardQueryHandler : IQueryHandler<GetPersonVacci
 {
     private readonly IPersonRepository _personRepository;
 
-    public GetPersonVaccinationCardQueryHandler(IPersonRepository personRepository)
+    public GetPersonVaccinationCardQueryHandler([FromKeyedServices(DbContextKeys.Read)] IPersonRepository personRepository)
     {
         _personRepository = personRepository;
     }

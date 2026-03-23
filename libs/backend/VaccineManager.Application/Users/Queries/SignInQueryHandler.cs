@@ -1,5 +1,7 @@
 using FluentResults;
+using Microsoft.Extensions.DependencyInjection;
 using VaccineManager.Application.Abstractions.Messaging;
+using VaccineManager.Application.Common.Constants;
 using VaccineManager.Application.Common.Errors;
 using VaccineManager.Application.Common.PasswordHasher;
 using VaccineManager.Application.Common.Token;
@@ -13,7 +15,7 @@ public class SignInQueryHandler : IQueryHandler<SignInQuery, SignInQueryResponse
     private readonly IPasswordHasher _passwordHasher;
     private readonly ITokenService _tokenService;
 
-    public SignInQueryHandler(IUserRepository userRepository, ITokenService tokenService, IPasswordHasher passwordHasher)
+    public SignInQueryHandler([FromKeyedServices(DbContextKeys.Read)] IUserRepository userRepository, ITokenService tokenService, IPasswordHasher passwordHasher)
     {
         _userRepository = userRepository;
         _tokenService = tokenService;

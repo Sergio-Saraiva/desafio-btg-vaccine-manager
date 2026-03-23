@@ -12,6 +12,7 @@ echo -e "${GREEN}Aplicando migrações pendentes no banco de dados...${NC}"
 
 dotnet ef database update \
     --project "$INFRA_PROJECT" \
-    --startup-project "$STARTUP_PROJECT" -v
+    --startup-project "$STARTUP_PROJECT" \
+    --context WriteDbContext -v
 
 echo -e "${GREEN}Banco de dados atualizado!${NC}"

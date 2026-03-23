@@ -20,6 +20,7 @@ fi
 # O target '0' é o comando especial do EF para reverter tudo
 dotnet ef database update 0 \
     --project "$INFRA_PROJECT" \
-    --startup-project "$STARTUP_PROJECT" -v
+    --startup-project "$STARTUP_PROJECT" \
+    --context WriteDbContext -v
 
 echo "Banco de dados resetado com sucesso."

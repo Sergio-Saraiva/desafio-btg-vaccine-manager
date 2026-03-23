@@ -1,5 +1,7 @@
 using FluentResults;
+using Microsoft.Extensions.DependencyInjection;
 using VaccineManager.Application.Abstractions.Messaging;
+using VaccineManager.Application.Common.Constants;
 using VaccineManager.Application.Common.Errors;
 using VaccineManager.Domain.Repositories;
 
@@ -10,7 +12,7 @@ public class DeleteVaccinationRecordCommandHandler : ICommandHandler<DeleteVacci
     private readonly IVaccinationRecordRepository _vaccinationRecordRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteVaccinationRecordCommandHandler(IVaccinationRecordRepository vaccinationRecordRepository, IUnitOfWork unitOfWork)
+    public DeleteVaccinationRecordCommandHandler([FromKeyedServices(DbContextKeys.Write)] IVaccinationRecordRepository vaccinationRecordRepository, IUnitOfWork unitOfWork)
     {
         _vaccinationRecordRepository = vaccinationRecordRepository;
         _unitOfWork = unitOfWork;

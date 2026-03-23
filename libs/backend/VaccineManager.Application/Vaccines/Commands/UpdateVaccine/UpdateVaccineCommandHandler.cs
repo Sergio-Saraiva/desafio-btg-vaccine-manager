@@ -1,5 +1,7 @@
 using FluentResults;
+using Microsoft.Extensions.DependencyInjection;
 using VaccineManager.Application.Abstractions.Messaging;
+using VaccineManager.Application.Common.Constants;
 using VaccineManager.Application.Common.Errors;
 using VaccineManager.Domain.Repositories;
 
@@ -10,7 +12,7 @@ public class UpdateVaccineCommandHandler : ICommandHandler<UpdateVaccineCommand,
     private readonly IVaccineRepository _vaccineRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public UpdateVaccineCommandHandler(IVaccineRepository vaccineRepository, IUnitOfWork unitOfWork)
+    public UpdateVaccineCommandHandler([FromKeyedServices(DbContextKeys.Write)] IVaccineRepository vaccineRepository, IUnitOfWork unitOfWork)
     {
         _vaccineRepository = vaccineRepository;
         _unitOfWork = unitOfWork;

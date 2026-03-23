@@ -14,7 +14,8 @@ echo -e "${BLUE}Lista de migrações aplicadas:${NC}"
 # Lista migrações para ajudar o usuário
 dotnet ef migrations list \
     --project "$INFRA_PROJECT" \
-    --startup-project "$STARTUP_PROJECT"
+    --startup-project "$STARTUP_PROJECT" \
+    --context WriteDbContext
 
 echo ""
 echo -e "${GREEN}Para desfazer a última, copie o nome da PENÚLTIMA migração acima.${NC}"
@@ -28,4 +29,5 @@ fi
 
 dotnet ef database update "$TARGET_MIGRATION" \
     --project "$INFRA_PROJECT" \
-    --startup-project "$STARTUP_PROJECT" -v
+    --startup-project "$STARTUP_PROJECT" \
+    --context WriteDbContext -v

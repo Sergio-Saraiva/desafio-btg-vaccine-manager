@@ -1,9 +1,11 @@
 using FluentResults;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Sieve.Models;
 using Sieve.Services;
 using VaccineManager.Application.Abstractions.Messaging;
+using VaccineManager.Application.Common.Constants;
 using VaccineManager.Application.Common.Responses;
 using VaccineManager.Domain.Repositories;
 
@@ -16,7 +18,7 @@ public class ListVaccineQueryHandler : IQueryHandler<ListVaccineQuery, PagedResp
     private readonly SieveOptions _sieveOptions;
 
     public ListVaccineQueryHandler(
-        IVaccineRepository vaccineRepository,
+        [FromKeyedServices(DbContextKeys.Read)] IVaccineRepository vaccineRepository,
         ISieveProcessor sieveProcessor,
         IOptions<SieveOptions> sieveOptions)
     {

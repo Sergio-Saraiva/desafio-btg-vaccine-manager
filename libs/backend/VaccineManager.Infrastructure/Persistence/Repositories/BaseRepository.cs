@@ -1,21 +1,20 @@
 using Microsoft.EntityFrameworkCore;
 using VaccineManager.Domain.Entities;
 using VaccineManager.Domain.Repositories;
-using VaccineManager.Infrastructure.Persistence.Context;
 
 namespace VaccineManager.Infrastructure.Persistence.Repositories;
 
 public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
 {
-    public BaseRepository(AppDbContext dbContext)
+    public BaseRepository(DbContext dbContext)
     {
         _dbContext = dbContext;
         _dbSet = dbContext.Set<T>();
     }
 
-    private readonly AppDbContext _dbContext;
+    private readonly DbContext _dbContext;
     protected readonly DbSet<T> _dbSet;
-    
+
     public async Task<T?> GetByIdAsync(Guid id)
     {
         return await _dbSet.FirstOrDefaultAsync(e => e.Id == id);

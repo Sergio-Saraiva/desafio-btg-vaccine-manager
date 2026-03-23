@@ -9,8 +9,8 @@ using VaccineManager.Infrastructure.Persistence.Context;
 
 namespace VaccineManager.Infrastructure.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(WriteDbContext))]
+    partial class WriteDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

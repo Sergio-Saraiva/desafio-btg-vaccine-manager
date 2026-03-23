@@ -1,5 +1,7 @@
 using FluentResults;
+using Microsoft.Extensions.DependencyInjection;
 using VaccineManager.Application.Abstractions.Messaging;
+using VaccineManager.Application.Common.Constants;
 using VaccineManager.Application.Common.Errors;
 using VaccineManager.Application.Common.PasswordHasher;
 using VaccineManager.Domain.Entities;
@@ -13,7 +15,7 @@ public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Creat
     private readonly IPasswordHasher _passwordHasher;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CreateUserCommandHandler(IUserRepository userRepository, IUnitOfWork unitOfWork,  IPasswordHasher passwordHasher)
+    public CreateUserCommandHandler([FromKeyedServices(DbContextKeys.Write)] IUserRepository userRepository, IUnitOfWork unitOfWork, IPasswordHasher passwordHasher)
     {
         _userRepository = userRepository;
         _unitOfWork = unitOfWork;
