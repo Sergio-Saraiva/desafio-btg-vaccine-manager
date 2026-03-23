@@ -14,6 +14,7 @@ public class AppDbContext : DbContext
     public DbSet<Person>  Persons { get; set; }
     public DbSet<Vaccine>  Vaccines { get; set; }
     public DbSet<VaccinationRecord>  VaccinationRecords { get; set; }
+    public DbSet<User> Users { get; set; }
     
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

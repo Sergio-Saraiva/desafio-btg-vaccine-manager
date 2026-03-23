@@ -71,7 +71,7 @@ public class SignInQueryHandlerTests
             .Returns(user);
         _passwordHasher.VerifyHash(query.Password, user.PasswordHash)
             .Returns(true);
-        _tokenService.GenereteToken(user.Email)
+        _tokenService.GenerateToken(user.Email)
             .Returns("jwt-token-value");
 
         // Act
@@ -96,7 +96,7 @@ public class SignInQueryHandlerTests
 
         // Assert
         _passwordHasher.DidNotReceive().VerifyHash(Arg.Any<string>(), Arg.Any<string>());
-        _tokenService.DidNotReceive().GenereteToken(Arg.Any<string>());
+        _tokenService.DidNotReceive().GenerateToken(Arg.Any<string>());
     }
 
     [Fact]
@@ -114,6 +114,6 @@ public class SignInQueryHandlerTests
         await _sut.Handle(query, CancellationToken.None);
 
         // Assert
-        _tokenService.DidNotReceive().GenereteToken(Arg.Any<string>());
+        _tokenService.DidNotReceive().GenerateToken(Arg.Any<string>());
     }
 }

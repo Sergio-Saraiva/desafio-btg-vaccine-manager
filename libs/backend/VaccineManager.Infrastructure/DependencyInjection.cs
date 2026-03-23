@@ -27,7 +27,6 @@ public static class DependencyInjection
             options.MaxPageSize = appSettings.SieveSettings.MaxPageSize;
             options.DefaultPageSize = appSettings.SieveSettings.DefaultPageSize;
         });
-        services.AddScoped<ISieveProcessor, SieveProcessor>();
         services.AddScoped<ISieveProcessor, AppSieveProcessor>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IPersonRepository, PersonRepository>();

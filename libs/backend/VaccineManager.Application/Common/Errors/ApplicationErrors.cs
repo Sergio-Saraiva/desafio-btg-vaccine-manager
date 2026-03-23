@@ -13,7 +13,7 @@ public class ApplicationErrors
             new(HttpStatusCode.NotFound, "A user with this ID was not found.");
         
         public static ApiError InvalidPasswordOrEmail =>
-            new(HttpStatusCode.Conflict, "Invalid password or email.");
+            new(HttpStatusCode.Unauthorized, "Invalid password or email.");
     }
     public static class Person
     {

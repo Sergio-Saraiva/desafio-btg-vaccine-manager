@@ -34,7 +34,7 @@ public class SignInQueryHandler : IQueryHandler<SignInQuery, SignInQueryResponse
             return Result.Fail(ApplicationErrors.User.InvalidPasswordOrEmail);
         }
 
-        var jwtToken = _tokenService.GenereteToken(userExists.Email);
+        var jwtToken = _tokenService.GenerateToken(userExists.Email);
         return Result.Ok(new SignInQueryResponse(userExists.Email, jwtToken));
     }
 }

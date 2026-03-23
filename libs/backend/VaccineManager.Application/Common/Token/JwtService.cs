@@ -16,7 +16,7 @@ public class JwtService : ITokenService
     {
         _appSettings = options.Value;
     }
-    public string GenereteToken(string email)
+    public string GenerateToken(string email)
     {
         var secretKey = Encoding.UTF8.GetBytes(_appSettings.JwtSettings.Key);
 
