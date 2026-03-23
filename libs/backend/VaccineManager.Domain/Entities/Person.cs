@@ -28,4 +28,18 @@ public class Person : BaseEntity
         DocumentNumber = documentNumber;
         Nationality = nationality;
     }
+
+    public void Reactivate()
+    {
+        DeletedAt = null;
+    }
+    
+    public new void Delete()
+    {
+        base.Delete();
+        foreach (var record in VaccinationRecords)
+        {
+            record.Delete(); 
+        }
+    }
 }

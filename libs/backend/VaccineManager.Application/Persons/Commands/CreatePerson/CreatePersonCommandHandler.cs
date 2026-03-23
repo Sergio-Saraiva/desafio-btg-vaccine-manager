@@ -21,11 +21,24 @@ public class CreatePersonCommandHandler : ICommandHandler<CreatePersonCommand, C
     public async Task<Result<CreatePersonResponse>> Handle(CreatePersonCommand request, CancellationToken cancellationToken)
     {
         var sanitizedDocument = DocumentSanitizerFactory.GetSanitizer(request.DocumentType).Sanitize(request.DocumentNumber);
-        var existingPerson = await _personRepository.GetByDocumentAsync(request.DocumentType, sanitizedDocument);
+        var existingPerson = await _personRepository.GetByDocumentIncludingDeletedAsync(request.DocumentType, sanitizedDocument);
 
         if (existingPerson != null)
         {
-            return Result.Fail<CreatePersonResponse>(ApplicationErrors.Person.DuplicateDocument);
+            if (!existingPerson.IsDeleted)
+            {
+                return Result.Fail<CreatePersonResponse>(ApplicationErrors.Person.DuplicateDocument);
+            }
+            
+            existingPerson.Reactivate();
+            _personRepository.UpdateAsync(existingPerson);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+            return Result.Ok(new CreatePersonResponse(
+                existingPerson.Id,
+                existingPerson.Name,
+                existingPerson.DocumentType.ToString(),
+                existingPerson.DocumentNumber,
+                existingPerson.Nationality));
         }
 
         var person = new Person(request.Name, request.DocumentType, request.DocumentNumber, request.Nationality);

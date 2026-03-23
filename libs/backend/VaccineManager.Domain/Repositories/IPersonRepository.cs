@@ -6,4 +6,5 @@ namespace VaccineManager.Domain.Repositories;
 public interface IPersonRepository : IBaseRepository<Person>
 {
     Task<Person?> GetByDocumentAsync(DocumentType documentType, string documentNumber);
+    Task<Person?> GetByDocumentIncludingDeletedAsync(DocumentType documentType, string documentNumber);
 }

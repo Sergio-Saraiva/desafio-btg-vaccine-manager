@@ -13,7 +13,7 @@ public class PersonConfiguration : IEntityTypeConfiguration<Person>
         builder.Property(p => p.Id);
         builder.Property(p => p.Name).IsRequired().HasMaxLength(250);
         
-        builder.HasIndex(p => new {p.DocumentType, p.DocumentNumber}).IsUnique();
+        builder.HasIndex(p => new { p.DocumentType, p.DocumentNumber }).IsUnique();
         
         builder.Property(p => p.DocumentType).IsRequired().HasConversion<int>();
         builder.Property(p => p.DocumentNumber).IsRequired();

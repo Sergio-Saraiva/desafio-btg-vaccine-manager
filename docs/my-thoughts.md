@@ -42,4 +42,5 @@
 - sanitizing documents number before iserting it in the db.
 - validating creating and updating vaccines. created unit tests
 - validating vaccination record creation and written unit tests.
+- handling edge cases in person creation. updated unit tests for person creation. now deleting a person also deletes their records.
 
