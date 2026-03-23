@@ -21,5 +21,9 @@
     &lt;TestId&gt;xUnit::74BC1314-C69B-4442-B39A-D5ED33B101CA::net10.0::VaccineManager.Application.Tests.Vaccines.Validators.UpdateVaccineCommandValidatorTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::74BC1314-C69B-4442-B39A-D5ED33B101CA::net10.0::VaccineManager.Application.Tests.Vaccines.Validators.CreateVaccineCommandValidatorTests&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::74BC1314-C69B-4442-B39A-D5ED33B101CA::net10.0::VaccineManager.Application.Tests.VaccinationRecords.Validators.CreateVaccinationRecordCommandValidatorTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::74BC1314-C69B-4442-B39A-D5ED33B101CA::net10.0::VaccineManager.Application.Tests.Users.Commands.CreateUserCommandHandlerTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::74BC1314-C69B-4442-B39A-D5ED33B101CA::net10.0::VaccineManager.Application.Tests.Users.Queries.SignInQueryHandlerTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::74BC1314-C69B-4442-B39A-D5ED33B101CA::net10.0::VaccineManager.Application.Tests.Users.Validators.CreateUserCommandValidatorTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::74BC1314-C69B-4442-B39A-D5ED33B101CA::net10.0::VaccineManager.Application.Tests.Users.Validators.SignInQueryValidatorTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

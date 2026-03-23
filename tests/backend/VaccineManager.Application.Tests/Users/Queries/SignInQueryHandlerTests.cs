@@ -37,7 +37,7 @@ public class SignInQueryHandlerTests
         result.IsFailed.Should().BeTrue();
         result.Errors.Should().ContainSingle()
             .Which.Should().BeOfType<ApiError>()
-            .Which.StatusCode.Should().Be(HttpStatusCode.Conflict);
+            .Which.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
 
     [Fact]
@@ -58,7 +58,7 @@ public class SignInQueryHandlerTests
         result.IsFailed.Should().BeTrue();
         result.Errors.Should().ContainSingle()
             .Which.Should().BeOfType<ApiError>()
-            .Which.StatusCode.Should().Be(HttpStatusCode.Conflict);
+            .Which.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
     }
 
     [Fact]

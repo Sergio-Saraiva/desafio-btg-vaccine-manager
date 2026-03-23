@@ -78,7 +78,7 @@ public class CreateVaccineCommandValidatorTests
 
     private static void SetRequiredDoses(CreateVaccineCommand vaccine, int value)
     {
-        typeof(Vaccine).GetProperty(nameof(Vaccine.RequiredDoses))!
+        typeof(CreateVaccineCommand).GetProperty(nameof(CreateVaccineCommand.RequiredDoses))!
             .SetValue(vaccine, value);
     }
 }
