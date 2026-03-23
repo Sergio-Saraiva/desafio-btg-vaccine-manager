@@ -64,9 +64,9 @@ public class CreateVaccinationRecordCommandValidatorTests
         result.Errors.Should().Contain(e => e.PropertyName == "VaccineId");
     }
 
-    private static Domain.Entities.VaccinationRecord CreateRecord(Guid personId, Guid vaccineId)
+    private static CreateVaccinationRecordCommand CreateRecord(Guid personId, Guid vaccineId)
     {
-        return new Domain.Entities.VaccinationRecord
+        return new CreateVaccinationRecordCommand
         (
             personId,
             vaccineId

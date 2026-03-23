@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sieve.Models;
 using VaccineManager.Application.Common.Responses;
@@ -12,6 +13,7 @@ namespace VaccineManager.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PersonsController : ApiBaseController
     {
         public PersonsController(ISender sender) : base(sender)
@@ -20,7 +22,8 @@ namespace VaccineManager.Api.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(ApiResponse<CreatePersonResponse>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status422UnprocessableEntity)] 
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> Post([FromBody] CreatePersonCommand command)
         {
             return await SendRequest(command);
@@ -28,6 +31,7 @@ namespace VaccineManager.Api.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponse<PagedResponse<ListPersonsResponse>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> List([FromQuery] SieveModel sieveModel)
         {
             return await SendRequest(new ListPersonsQuery(sieveModel));
@@ -35,6 +39,7 @@ namespace VaccineManager.Api.Controllers
 
         [HttpGet("{id:guid}/vaccination-card")]
         [ProducesResponseType(typeof(ApiResponse<GetPersonVaccinationCardResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetVaccinationCard([FromRoute] Guid id)
         {
@@ -44,7 +49,8 @@ namespace VaccineManager.Api.Controllers
 
         [HttpPut]
         [ProducesResponseType(typeof(ApiResponse<UpdatePersonResponse>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]                                          
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> Update([FromBody] UpdatePersonCommand command)
         {
@@ -52,8 +58,9 @@ namespace VaccineManager.Api.Controllers
         }
 
         [HttpDelete("{id:guid}")]
-        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status204NoContent)]                                         
-        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)] 
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var command = new DeletePersonCommand(id);

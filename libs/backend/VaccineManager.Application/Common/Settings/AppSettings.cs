@@ -4,4 +4,5 @@ public class AppSettings
 {
     public SQLiteSettings SQLiteSettings { get; set; }
     public SieveSettings SieveSettings { get; set; }
+    public JwtSettings JwtSettings { get; set; }
 }

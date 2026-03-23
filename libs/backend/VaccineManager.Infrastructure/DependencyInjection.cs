@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Sieve.Models;
 using Sieve.Services;
 using VaccineManager.Application.Common.Settings;
+using VaccineManager.Application.Common.Token;
 using VaccineManager.Domain.Repositories;
 using VaccineManager.Infrastructure.Persistence.Context;
 using VaccineManager.Infrastructure.Persistence.Repositories;
@@ -32,6 +33,8 @@ public static class DependencyInjection
         services.AddScoped<IPersonRepository, PersonRepository>();
         services.AddScoped<IVaccineRepository, VaccineRepository>();
         services.AddScoped<IVaccinationRecordRepository, VaccinationRecordRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ITokenService, JwtService>();
 
         return services;
     }

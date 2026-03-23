@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace VaccineManager.Application.VaccinationRecord.CreateVaccinationRecord;
 
-public class CreateVaccinationRecordCommandValidator : AbstractValidator<Domain.Entities.VaccinationRecord>
+public class CreateVaccinationRecordCommandValidator : AbstractValidator<CreateVaccinationRecordCommand>
 {
     public CreateVaccinationRecordCommandValidator()
     {

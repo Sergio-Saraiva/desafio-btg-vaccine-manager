@@ -3,7 +3,7 @@ using VaccineManager.Domain.Entities;
 
 namespace VaccineManager.Application.Vaccines.Commands.CreateVaccine;
 
-public class CreateVaccineCommandValidator : AbstractValidator<Vaccine>
+public class CreateVaccineCommandValidator : AbstractValidator<CreateVaccineCommand>
 {
     public CreateVaccineCommandValidator()
     {

@@ -13,7 +13,7 @@ public static class NativeInjectorBootstrap
         var appSettings = new AppSettings();
         configuration.Bind(appSettings);
         services
-            .AddApplication()
+            .AddApplication(appSettings)
             .AddInfrastructure(appSettings);
         
         return services;

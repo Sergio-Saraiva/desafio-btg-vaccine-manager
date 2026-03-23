@@ -4,6 +4,17 @@ namespace VaccineManager.Application.Common.Errors;
 
 public class ApplicationErrors
 {
+    public static class User
+    {
+        public static ApiError DuplicateEmail  =>
+            new(HttpStatusCode.Conflict, "A user with this email already exists.");
+        
+        public static ApiError NotFound   =>
+            new(HttpStatusCode.NotFound, "A user with this ID was not found.");
+        
+        public static ApiError InvalidPasswordOrEmail =>
+            new(HttpStatusCode.Conflict, "Invalid password or email.");
+    }
     public static class Person
     {
         public static ApiError NotFound(Guid id) =>

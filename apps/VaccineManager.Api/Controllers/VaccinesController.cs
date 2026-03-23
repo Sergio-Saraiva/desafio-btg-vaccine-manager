@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sieve.Models;
 using VaccineManager.Application.Common.Responses;
@@ -11,6 +12,7 @@ namespace VaccineManager.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class VaccinesController : ApiBaseController
     {
         public VaccinesController(ISender sender) : base(sender)
@@ -18,7 +20,8 @@ namespace VaccineManager.Api.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ApiResponse<CreateVaccineResponse>), StatusCodes.Status200OK)]                         
+        [ProducesResponseType(typeof(ApiResponse<CreateVaccineResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> Create([FromBody] CreateVaccineCommand command)
         {
@@ -27,6 +30,7 @@ namespace VaccineManager.Api.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponse<PagedResponse<ListVaccineResponse>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> List([FromQuery] SieveModel sieveModel)
         {
             var query = new ListVaccineQuery(sieveModel);
@@ -35,8 +39,9 @@ namespace VaccineManager.Api.Controllers
 
         [HttpPut]
         [ProducesResponseType(typeof(ApiResponse<UpdateVaccineResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status422UnprocessableEntity)]   
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> Update([FromBody] UpdateVaccineCommand command)
         {
             return await SendRequest(command);
@@ -44,7 +49,8 @@ namespace VaccineManager.Api.Controllers
 
         [HttpDelete("{id:guid}")]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)] 
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(Guid id)
         {
             var command = new DeleteVaccineCommand(id);

@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VaccineManager.Application.Common.Responses;
 using VaccineManager.Application.VaccinationRecord.CreateVaccinationRecord;
@@ -8,6 +9,7 @@ namespace VaccineManager.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class VaccinationRecordController : ApiBaseController
     {
         public VaccinationRecordController(ISender sender) : base(sender)
@@ -16,7 +18,8 @@ namespace VaccineManager.Api.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(ApiResponse<CreateVaccinationRecordResponse>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]                                          
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status422UnprocessableEntity)]
         public async Task<IActionResult> Post([FromBody] CreateVaccinationRecordCommand command)
         {
@@ -25,7 +28,8 @@ namespace VaccineManager.Api.Controllers
 
         [HttpDelete("{id:guid}")]
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]   
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(Guid id)
         {
             var command = new DeleteVaccinationRecordCommand(id);

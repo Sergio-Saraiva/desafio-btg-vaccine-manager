@@ -1,3 +1,4 @@
+using Microsoft.OpenApi;
 using VaccineManager.Api.Middlewares;
 using VaccineManager.Application.Common.Settings;
 using VaccineManager.IOC;
@@ -16,7 +17,21 @@ public class Program
         builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
         builder.Services.AddProblemDetails();
         builder.Services.AddControllers();
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(options =>
+        {
+            options.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
+            {
+                Type = SecuritySchemeType.Http,
+                Scheme = "bearer",
+                BearerFormat = "JWT",
+                Description = "JWT Authorization header using the Bearer scheme."
+            });
+
+            options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+            {
+                [new OpenApiSecuritySchemeReference("bearer", document)] = []
+            });
+        });
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.RegisterServices(builder.Configuration);
         builder.Services.AddCors(options =>
@@ -49,7 +64,8 @@ public class Program
 
         app.UseExceptionHandler();
         app.UseHttpsRedirection();
-        app.UseAuthorization(); 
+        app.UseAuthentication();
+        app.UseAuthorization();
         app.MapControllers();
 
         app.Run();

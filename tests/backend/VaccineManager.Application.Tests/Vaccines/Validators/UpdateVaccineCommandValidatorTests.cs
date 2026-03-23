@@ -11,7 +11,7 @@ public class UpdateVaccineCommandValidatorTests
     [Fact]
     public async Task Validate_ValidVaccine_ReturnsValid()
     {
-        var vaccine = new Vaccine("BCG", 1, "VAC-001");
+        var vaccine = new UpdateVaccineCommand(Guid.NewGuid(),"BCG", 1);
         var result = await _sut.ValidateAsync(vaccine);
 
         result.IsValid.Should().BeTrue();
@@ -20,7 +20,7 @@ public class UpdateVaccineCommandValidatorTests
     [Fact]
     public async Task Validate_EmptyName_ReturnsError()
     {
-        var vaccine = new Vaccine("", 1, "VAC-001");
+        var vaccine = new UpdateVaccineCommand(Guid.NewGuid(),string.Empty, 1);
         var result = await _sut.ValidateAsync(vaccine);
 
         result.IsValid.Should().BeFalse();
@@ -30,7 +30,7 @@ public class UpdateVaccineCommandValidatorTests
     [Fact]
     public async Task Validate_NameExceeds250_ReturnsError()
     {
-        var vaccine = new Vaccine(new string('A', 251), 1, "VAC-001");
+        var vaccine = new UpdateVaccineCommand(Guid.NewGuid(),new string('A', 251), 1);
         var result = await _sut.ValidateAsync(vaccine);
 
         result.IsValid.Should().BeFalse();
@@ -40,7 +40,8 @@ public class UpdateVaccineCommandValidatorTests
     [Fact]
     public async Task Validate_RequiredDosesIsZero_ReturnsError()
     {
-        var vaccine = new Vaccine("BCG", 1);
+     
+        var vaccine = new UpdateVaccineCommand(Guid.NewGuid(),"BCG", 1);
         SetRequiredDoses(vaccine, 0);
         var result = await _sut.ValidateAsync(vaccine);
 
@@ -48,7 +49,7 @@ public class UpdateVaccineCommandValidatorTests
         result.Errors.Should().Contain(e => e.PropertyName == "RequiredDoses");
     }
 
-    private static void SetRequiredDoses(Vaccine vaccine, int value)
+    private static void SetRequiredDoses(UpdateVaccineCommand vaccine, int value)
     {
         typeof(Vaccine).GetProperty(nameof(Vaccine.RequiredDoses))!
             .SetValue(vaccine, value);
